@@ -1,48 +1,84 @@
 <template>
-  <v-app id="inspire">
-    <v-content>
-      <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4>
-            <v-card class="elevation-12">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title>Register</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field
-                    prepend-icon="person"
-                    name="login"
-                    label="Login"
-                    type="text">
-                  </v-text-field>
-                  <v-text-field
-                    prepend-icon="lock"
-                    name="password"
-                    label="Password"
-                    id="password"
-                    type="password">
-                  </v-text-field>
-                </v-form>
-              </v-card-text>
+  <v-container fluid fill-height>
+    <v-layout align-center justify-center>
+      <v-flex xs12 sm8 md4>
+        <v-card class="elevation-12">
+          <v-toolbar dark color="primary">
+            <v-toolbar-title>Register</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <v-text-field
+                prepend-icon="person"
+                v-model="email"
+                :rules="emailRules"
+                label="E-mail"
+                required
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="lock"
+                v-model="password"
+                :rules="passwordRules"
+                label="Password"
+                type="password"
+                required
+              ></v-text-field>
+              <v-alert v-if="error" :value="true" color="error" icon="warning" v-html="error" />
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary">Register</v-btn>
+              <v-spacer></v-spacer>
+              <v-btn
+              large
+              color="primary"
+              :disabled="!valid"
+              @click="register"
+              >
+                Register
+              </v-btn>
               </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
-  </v-app>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
+import Authentication from '@/services/Authentication'
 export default {
-  name: 'Register',
   data () {
     return {
-      msg: 'Register Page'
+      valid: true,
+      password: '',
+      passwordRules: [
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 8) || 'Password must be at least 8 characters in length'
+      ],
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ],
+      error: null
+    }
+  },
+  methods: {
+    async register () {
+      if (this.$refs.form.validate()) {
+        try {
+          const response = await Authentication.register({
+            email: this.email,
+            password: this.password
+          })
+          this.$store.dispatch('setToken', response.data.token)
+          this.$store.dispatch('setUser', response.data.user)
+          this.$router.push({
+            name: 'songs'
+          })
+        } catch (error) {
+          this.error = error.response.data.error
+        }
+      }
     }
   }
 }
