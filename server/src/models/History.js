@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const History = sequelize.define('History', {}, {
-    timestamps: false
+    // timestamps: false
   })
   History.removeAttribute('id')
 

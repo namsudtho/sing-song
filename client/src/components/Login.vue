@@ -27,10 +27,10 @@
               <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-              large
-              color="primary"
-              :disabled="!valid"
-              @click="login"
+                large
+                color="primary"
+                :disabled="!valid"
+                @click="login"
               >
                 Login
               </v-btn>
@@ -44,28 +44,41 @@
 </template>
 
 <script>
-// import Authentication from '@/services/Authentication'
+import Authentication from '@/services/Authentication'
 
 export default {
   data () {
     return {
       valid: true,
       password: '',
+      email: '',
+      error: null,
       passwordRules: [
         v => !!v || 'Password is required',
         v => (v && v.length >= 8) || 'Password must be at least 8 characters in length'
       ],
-      email: '',
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-      ],
-      error: null
+      ]
     }
   },
   methods: {
     async login () {
       if (this.$refs.form.validate()) {
+        try {
+          const response = await Authentication.login({
+            email: this.email,
+            password: this.password
+          })
+          this.$store.dispatch('setToken', response.data.token)
+          this.$store.dispatch('setUser', response.data.user)
+          this.$router.push({
+            name: 'songs'
+          })
+        } catch (error) {
+          this.error = error.response.data.error
+        }
       }
     }
   }

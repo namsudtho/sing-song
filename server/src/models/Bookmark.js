@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Bookmark = sequelize.define('Bookmark', {}, {
-    timestamps: false
+    // timestamps: false
   })
   Bookmark.removeAttribute('id')
 

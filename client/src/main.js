@@ -5,10 +5,11 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import { sync } from 'vuex-router-sync'
-import 'babel-polyfill'
-import 'vuetify/dist/vuetify.min.css'
 import store from '@/store/store'
 import VueYouTubeEmbed from 'vue-youtube-embed'
+import 'babel-polyfill'
+
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)

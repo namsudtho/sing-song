@@ -1,17 +1,19 @@
 <template>
-  <div id="app">
-    <v-app id="inspire">
-      <v-content>
-        <!-- <img src="./assets/logo.png"> -->
-        <router-view/>
-      </v-content>
-    </v-app>
-  </div>
+  <v-app id="inspire">
+    <page-header />
+    <v-content>
+      <router-view />
+    </v-content>
+  </v-app>
 </template>
 
 <script>
+import PageHeader from '@/components/Header'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    PageHeader
+  }
 }
 </script>
 
@@ -23,5 +25,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.img-brand {
+  width: 45px;
+  -webkit-filter: invert(1);
+  filter: invert(1);
 }
 </style>
