@@ -7,6 +7,7 @@ import Songs from '@/components/Songs/index'
 import SongView from '@/components/Songs/SongView'
 import SongShow from '@/components/Songs/SongShow'
 import SongAdd from '@/components/Songs/SongAdd'
+import SongEdit from '@/components/Songs/SongEdit'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
           path: '/songs/add',
           name: 'songadd',
           component: SongAdd
+        },
+        {
+          path: '/songs/edit/:songId',
+          name: 'songedit',
+          component: SongEdit
         }
       ]
     }

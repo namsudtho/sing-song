@@ -43,6 +43,17 @@
               <v-btn icon>
                 <v-icon>share</v-icon>
               </v-btn>
+              <v-btn
+                icon
+                :to="{
+                  name: 'songedit',
+                  params: {
+                    songId: song.id
+                  }
+                }"
+              >
+                <v-icon medium>edit</v-icon>
+              </v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>

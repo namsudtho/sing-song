@@ -14,7 +14,7 @@ export default {
   post (song) {
     return Api().post('songs/', song)
   },
-  put (song, songId) {
-    return Api().put('song/' + songId, song)
+  put (song) {
+    return Api().put('songs/' + song.id, song)
   }
 }
