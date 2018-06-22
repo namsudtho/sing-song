@@ -1,9 +1,11 @@
 <template>
   <div>
+    <song-search class="song-search" />
     <v-layout row wrap grid-list-lg>
       <v-flex md3 sm6 xs12 v-for="song in songs" :key="song.id">
         <v-card class="song-list" >
-          <v-card-media class="v-card-media"
+          <v-card-media
+            class="v-card-media"
             :src="song.albumImageUrl"
           >
             <v-layout fill-height>
@@ -53,6 +55,7 @@
 
 <script>
 import Songs from '@/services/Songs'
+import SongSearch from '@/components/Songs/SongSearch'
 
 export default {
   data () {
@@ -67,6 +70,9 @@ export default {
         this.songs = (await Songs.index(value)).data
       }
     }
+  },
+  components: {
+    SongSearch
   }
 }
 </script>
@@ -86,5 +92,8 @@ export default {
   }
   .song-list {
     margin: 0 10px 10px 0;
+  }
+  .song-search {
+    margin: 0 10px 0 0;
   }
 </style>
