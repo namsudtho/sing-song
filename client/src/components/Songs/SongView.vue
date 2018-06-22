@@ -1,65 +1,54 @@
 <template>
-  <v-layout>
-    <v-flex
-      xs12
-      md6
-      lg3
-      v-for="song in songs"
-      :key="song.id"
-    >
-      <v-card class="song-list">
-        <v-layout row>
-          <v-flex>
-            <v-card flat>
-              <v-card-media class="v-card-media"
-                :src="song.albumImageUrl"
-                height="200px"
-              >
-                <v-layout fill-height>
-                  <v-flex xs12 align-end flexbox>
-                    <div class="title">
-                      <label>{{song.title}} - {{song.artist}}</label>
-                    </div>
-                  </v-flex>
-                </v-layout>
-              </v-card-media>
-            </v-card>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                icon
-                :to="{
-                  name: 'songshow',
-                  params: {
-                    songId: song.id
-                  }
-                }"
-              >
-                <v-icon medium>play_arrow</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>bookmark</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>share</v-icon>
-              </v-btn>
-              <v-btn
-                icon
-                :to="{
-                  name: 'songedit',
-                  params: {
-                    songId: song.id
-                  }
-                }"
-              >
-                <v-icon medium>edit</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-flex>
-        </v-layout>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <div>
+    <v-layout row wrap grid-list-lg>
+      <v-flex md3 sm6 xs12 v-for="song in songs" :key="song.id">
+        <v-card class="song-list" >
+          <v-card-media class="v-card-media"
+            :src="song.albumImageUrl"
+          >
+            <v-layout fill-height>
+              <v-flex xs12 align-end flexbox>
+                <div class="title">
+                  <label class="subheading">{{song.title}} - {{song.artist}}</label>
+                </div>
+              </v-flex>
+            </v-layout>
+          </v-card-media>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              icon
+              :to="{
+                name: 'songshow',
+                params: {
+                  songId: song.id
+                }
+              }"
+            >
+              <v-icon medium>play_arrow</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon>bookmark</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon>share</v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              :to="{
+                name: 'songedit',
+                params: {
+                  songId: song.id
+                }
+              }"
+            >
+              <v-icon medium>edit</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
 <script>
@@ -84,7 +73,7 @@ export default {
 
 <style scoped>
   .v-card-media {
-    height: 600px;
+    height: 200px;
   }
   .title {
     color: white;

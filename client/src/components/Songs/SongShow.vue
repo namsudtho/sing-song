@@ -26,7 +26,7 @@
           <div>
             <p class="headline text-xs-center">Lyrics: {{song.title}}</p>
             <textarea
-              class="text-xs-center"
+              class="text-xs-center body-2"
               readonly
               v-model="song.lyrics"
             ></textarea>

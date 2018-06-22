@@ -10,18 +10,18 @@
           <v-card dark color="primary">
             <v-card-text class="px-0">4</v-card-text>
           </v-card>
-          <v-btn
-            fab
-            bottom
-            right
-            color="pink"
-            dark
-            fixed
-            :to="{ name: 'songadd' }"
-          >
-            <v-icon>add</v-icon>
-          </v-btn>
         </v-flex>
+        <v-btn
+          fab
+          bottom
+          right
+          color="pink"
+          dark
+          fixed
+          :to="{ name: 'songadd' }"
+        >
+          <v-icon>add</v-icon>
+        </v-btn>
       </v-layout>
   </v-container>
 </template>

@@ -2,7 +2,7 @@
   <v-form ref="form" v-model="valid" lazy-validation>
     <v-card class="card">
       <v-card-title
-        class="grey lighten-4 py-4 title"
+        class="grey lighten-4 title"
       >
         Create Song
       </v-card-title>
